@@ -4,6 +4,7 @@
     python -m app.cli criar-admin --nome "Fulana" --email adm@pref.gov.br [--senha ...]
     python -m app.cli demo [--simular-vinculo]   # dados de exemplo (desenvolvimento)
     python -m app.cli webhook https://dominio/api/bot/telegram/webhook
+    python -m app.cli simular-resposta 5 3 aceito   # 3º colocado aceita a solicitação 5 (dev)
     python -m app.cli bot-polling         # bot sem webhook (desenvolvimento)
 """
 from __future__ import annotations
@@ -60,6 +61,25 @@ def webhook(args) -> None:
         args.url, cfg.telegram_webhook_secret))
 
 
+def simular_resposta(args) -> None:
+    """Somente desenvolvimento: responde como o professor da posição indicada,
+    sem precisar do Telegram (mesmo caminho do botão no bot)."""
+    from .models import Convocacao, Solicitacao, TipoResposta
+    from .services import motor
+
+    tipo = TipoResposta.ACEITE if args.resposta == "aceito" else TipoResposta.RECUSA
+    with transacao() as s:
+        conv = s.execute(
+            select(Convocacao).join(Solicitacao, Solicitacao.id == Convocacao.solicitacao_id)
+            .where(Convocacao.solicitacao_id == args.solicitacao,
+                   Convocacao.ciclo == Solicitacao.ciclo, Convocacao.posicao == args.posicao)
+        ).scalar_one_or_none()
+        if conv is None:
+            sys.exit(f"O {args.posicao}º colocado não foi convocado na solicitação {args.solicitacao}.")
+        r = motor.responder(s, conv.id, conv.professor_id, tipo)
+    print(f"{args.posicao}º colocado respondeu '{args.resposta}': {r.resultado.value} — {r.mensagem}")
+
+
 def bot_polling(_args) -> None:
     """Modo desenvolvimento: busca updates (long polling) em vez de webhook."""
     from .bot.handlers import processar_update
@@ -95,6 +115,11 @@ def main() -> None:
     w = sub.add_parser("webhook")
     w.add_argument("url")
     w.set_defaults(f=webhook)
+    r = sub.add_parser("simular-resposta", help="responde como um professor (só dev)")
+    r.add_argument("solicitacao", type=int, help="número da solicitação (#)")
+    r.add_argument("posicao", type=int, help="posição do professor na classificação")
+    r.add_argument("resposta", choices=["aceito", "recuso"])
+    r.set_defaults(f=simular_resposta)
     sub.add_parser("bot-polling").set_defaults(f=bot_polling)
     args = p.parse_args()
     args.f(args)

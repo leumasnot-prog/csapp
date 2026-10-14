@@ -43,7 +43,19 @@ backend/app/
 frontend/src/            painel do diretor e da Secretaria
 ```
 
-## Rodando localmente
+## Rodando no Windows (mais simples)
+
+1. Instale, aceitando as opções padrão:
+   - [Python 3.12+](https://www.python.org/downloads/), marcando **"Add python.exe to PATH"**;
+   - [Node.js LTS](https://nodejs.org/);
+   - [PostgreSQL](https://www.postgresql.org/download/windows/). **Anote a senha** que ele pedir para o usuário `postgres`.
+2. Na pasta do projeto, dê dois cliques em **`instalar-windows.bat`**. Ele pede a senha do
+   `postgres`, cria o banco, compila o painel e cria os dados de demonstração.
+3. Dê dois cliques em **`iniciar-windows.bat`**. O navegador abre em http://localhost:8000.
+4. Para simular a resposta de um professor sem o Telegram, use, num `cmd` na pasta do projeto:
+   `simular-resposta.bat 1 3 aceito` (solicitação nº 1, 3º colocado aceita).
+
+## Rodando localmente (Linux/macOS)
 
 Pré-requisitos: Python 3.12+, Node 20+ e PostgreSQL 14+.
 

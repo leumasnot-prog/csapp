@@ -52,7 +52,7 @@ export default function Acompanhamento() {
         <p className="muted">
           {s.escola.nome} · {fmtPeriodo(s.data_inicio, s.data_fim)} · {fmtHora(s.hora_inicio)}–{fmtHora(s.hora_fim)}
           <br />
-          Criada por {s.criada_por} em {fmtDataHora(s.criada_em)} · prazo por onda: {s.timeout_minutos} min
+          Solicitação nº {s.id} · criada por {s.criada_por} em {fmtDataHora(s.criada_em)} · prazo por onda: {s.timeout_minutos} min
           {s.ciclo > 1 && <> · reaberta ({s.ciclo}º ciclo)</>}
         </p>
         {s.observacoes && <p className="pequeno">📝 {s.observacoes}</p>}
