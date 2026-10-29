@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
+import { DEMO } from "../api";
 import { Erro } from "../ui";
 
 export default function Login() {
@@ -14,12 +15,12 @@ export default function Login() {
 
   if (usuario) return <Navigate to="/" replace />;
 
-  async function enviar(e: FormEvent) {
-    e.preventDefault();
+  async function enviar(e: FormEvent | null, credenciais?: [string, string]) {
+    e?.preventDefault();
     setEnviando(true);
     setErro(null);
     try {
-      await entrar(login, senha);
+      await entrar(...(credenciais ?? [login, senha]));
       navigate(loc.state?.de ?? "/", { replace: true });
     } catch (err) {
       setErro((err as Error).message);
@@ -44,6 +45,20 @@ export default function Login() {
         </div>
         <button className="largo" disabled={enviando}>{enviando ? "Entrando…" : "Entrar"}</button>
         <p className="pequeno"><Link to="/esqueci-senha">Esqueci minha senha</Link></p>
+        {DEMO && (
+          <div className="demo-acesso">
+            <strong>Demonstração</strong>
+            <p className="pequeno muted">Dados fictícios, guardados só neste navegador. Entre com um perfil:</p>
+            <div className="linha">
+              <button type="button" className="secundario" disabled={enviando} onClick={() => enviar(null, ["diretor@exemplo.gov.br", "diretor12345"])}>
+                Diretora (EMEF Monteiro Lobato)
+              </button>
+              <button type="button" className="secundario" disabled={enviando} onClick={() => enviar(null, ["admin@exemplo.gov.br", "admin12345"])}>
+                Secretaria de Educação
+              </button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );

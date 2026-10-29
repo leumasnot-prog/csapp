@@ -2,6 +2,13 @@
 
 const CHAVE_TOKEN = "subst.token";
 
+/** Modo demonstração: tudo roda no navegador, sem servidor nem banco. */
+export const DEMO = import.meta.env.VITE_DEMO === "1";
+
+async function demo() {
+  return import("./demo/servidor");
+}
+
 export class ErroApi extends Error {
   constructor(public status: number, mensagem: string) {
     super(mensagem);
@@ -43,6 +50,7 @@ export async function api<T = unknown>(
   caminho: string,
   opcoes: { metodo?: string; corpo?: unknown; form?: FormData } = {},
 ): Promise<T> {
+  if (DEMO) return (await demo()).chamar<T>(caminho, opcoes);
   const headers: Record<string, string> = {};
   const t = token();
   if (t) headers.Authorization = `Bearer ${t}`;
@@ -65,6 +73,11 @@ export async function api<T = unknown>(
 
 /** Baixa um arquivo autenticado (CSV) e dispara o download no navegador. */
 export async function baixar(caminho: string, nome: string) {
+  if (DEMO) {
+    const { mostrarTexto } = await import("./dialogo");
+    const texto = await api<string>(caminho);
+    return mostrarTexto(nome, texto, "Na demonstração o arquivo é exibido aqui; no sistema instalado ele é baixado.");
+  }
   const r = await fetch(caminho, { headers: { Authorization: `Bearer ${token()}` } });
   if (!r.ok) throw new ErroApi(r.status, `Erro ${r.status}`);
   const url = URL.createObjectURL(await r.blob());

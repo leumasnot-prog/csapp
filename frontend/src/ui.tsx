@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "./auth";
-import type { StatusSolicitacao } from "./api";
+import { api, DEMO, type StatusSolicitacao } from "./api";
+import { confirmar } from "./dialogo";
 
 // ------------------------------------------------------------------ formatação (America/Sao_Paulo)
 const TZ = "America/Sao_Paulo";
@@ -76,8 +77,21 @@ export function Layout({ children }: { children: ReactNode }) {
   const { usuario, sair } = useAuth();
   const navigate = useNavigate();
   const admin = usuario?.perfil === "admin";
+  async function reiniciar() {
+    if (!(await confirmar("Reiniciar a demonstração?", "Tudo o que você criou será apagado e os dados de exemplo voltam ao estado inicial.", { ok: "Reiniciar", perigo: true }))) return;
+    await api("/api/demo/reiniciar", { corpo: {} });
+    sair();
+    navigate("/login");
+  }
+
   return (
     <div className="app">
+      {DEMO && (
+        <div className="faixa-demo">
+          <span>Modo demonstração: dados fictícios, sem servidor nem banco.</span>
+          <button className="link" onClick={reiniciar}>Reiniciar dados</button>
+        </div>
+      )}
       <header className="topo">
         <div className="topo-linha">
           <strong className="marca">Substituições</strong>

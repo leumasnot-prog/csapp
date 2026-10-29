@@ -1,5 +1,6 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { api } from "../../api";
+import { confirmar } from "../../dialogo";
 import { Carregando, Erro, fmtDataHora, useCarregar } from "../../ui";
 
 interface Lista {
@@ -59,7 +60,7 @@ export default function Listas() {
   }
 
   async function ativarLista(id: number) {
-    if (!window.confirm("Ativar esta lista? Novas solicitações passarão a usá-la.")) return;
+    if (!(await confirmar("Ativar esta lista?", "As próximas solicitações passarão a usar esta classificação.", { ok: "Ativar lista" }))) return;
     await api(`/api/admin/listas/${id}/ativar`, { corpo: {} });
     recarregar();
   }

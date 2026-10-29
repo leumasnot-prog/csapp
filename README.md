@@ -43,6 +43,16 @@ backend/app/
 frontend/src/            painel do diretor e da Secretaria
 ```
 
+## Só para ver: demonstração sem instalar nada
+
+Abra o arquivo **`demo/substituicao-demo.html`** com dois cliques. Ele roda inteiro no
+navegador, com dados fictícios, sem servidor e sem banco. Na tela de login há botões para
+entrar como diretora ou como Secretaria. Na tela de cada solicitação, o quadro
+**"Celular dos professores"** permite responder no lugar deles (Aceito/Recuso) e encerrar o
+prazo de uma onda. As regras são as mesmas da API real, e os dados ficam só naquele navegador.
+
+Para gerar o arquivo de novo: `cd frontend && npm run build:demo`.
+
 ## Rodando no Windows (mais simples)
 
 1. Instale, aceitando as opções padrão:

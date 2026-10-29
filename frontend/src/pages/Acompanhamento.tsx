@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { api, baixar, type SolicitacaoDetalhe } from "../api";
+import { api, baixar, DEMO, type SolicitacaoDetalhe } from "../api";
+import { perguntar } from "../dialogo";
 import { Badge, Carregando, Erro, fmtDataHora, fmtDuracao, fmtHora, fmtPeriodo, useCarregar } from "../ui";
+
+const Simulador = DEMO ? lazy(() => import("../demo/Simulador")) : null;
 
 const FIM_ONDA: Record<string, string> = {
   ACEITE: "vaga preenchida",
@@ -13,7 +16,7 @@ const FIM_ONDA: Record<string, string> = {
 
 export default function Acompanhamento() {
   const { id } = useParams();
-  const { dados: s, erro, setDados } = useCarregar(
+  const { dados: s, erro, setDados, recarregar } = useCarregar(
     () => api<SolicitacaoDetalhe>(`/api/solicitacoes/${id}`),
     [id],
     5_000,
@@ -86,12 +89,15 @@ export default function Acompanhamento() {
             <button
               className="perigo"
               disabled={ocupado}
-              onClick={() => {
-                const motivo = window.prompt(
-                  s.status === "PREENCHIDA"
-                    ? "Cancelar? O professor que aceitou será avisado. Motivo (opcional):"
-                    : "Cancelar a convocação? Motivo (opcional):",
-                );
+              onClick={async () => {
+                const motivo = await perguntar("Cancelar esta solicitação?", "Motivo (opcional)", {
+                  texto:
+                    s.status === "PREENCHIDA"
+                      ? "O professor que aceitou será avisado do cancelamento."
+                      : "Os professores com convocação em aberto serão avisados.",
+                  ok: "Cancelar solicitação",
+                  perigo: true,
+                });
                 if (motivo !== null) acao(`/api/solicitacoes/${s.id}/cancelar`, { motivo });
               }}
             >
@@ -111,6 +117,12 @@ export default function Acompanhamento() {
           </button>
         </div>
       </div>
+
+      {Simulador && (
+        <Suspense fallback={null}>
+          <Simulador s={s} aoMudar={(d) => (d ? setDados(d) : recarregar())} />
+        </Suspense>
+      )}
 
       <h2>Convocações</h2>
       {s.ondas.length === 0 && <p className="muted">Nenhuma onda disparada.</p>}

@@ -1,6 +1,8 @@
 import { StrictMode, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, MemoryRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { DEMO } from "./api";
+import { Dialogos } from "./dialogo";
 import { AuthProvider, useAuth } from "./auth";
 import { Carregando, Layout } from "./ui";
 import Login from "./pages/Login";
@@ -48,12 +50,17 @@ function App() {
   );
 }
 
+// Na demonstração a navegação fica em memória: funciona aberta como arquivo
+// local ou dentro de outra página.
+const Router = DEMO ? MemoryRouter : BrowserRouter;
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <Router>
       <AuthProvider>
         <App />
+        <Dialogos />
       </AuthProvider>
-    </BrowserRouter>
+    </Router>
   </StrictMode>,
 );

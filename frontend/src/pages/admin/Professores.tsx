@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { api, type Catalogo } from "../../api";
+import { confirmar } from "../../dialogo";
 import { Carregando, Erro, fmtDataHora, useCarregar } from "../../ui";
 
 interface Professor {
@@ -65,7 +66,7 @@ export default function Professores() {
   }
 
   async function gerarCodigo(p: Professor) {
-    if (!window.confirm(`Gerar novo código de vínculo para ${p.nome}? Um código anterior deixa de valer.`)) return;
+    if (!(await confirmar(`Gerar código de vínculo para ${p.nome}?`, "Um código gerado antes para este professor deixa de valer.", { ok: "Gerar código" }))) return;
     const r = await api<{ codigo: string; expira_em: string; instrucoes: string }>(`/api/admin/professores/${p.id}/codigo-vinculo`, { corpo: {} });
     setCodigo({ nome: p.nome, ...r });
   }
