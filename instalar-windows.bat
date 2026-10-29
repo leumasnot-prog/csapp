@@ -33,7 +33,7 @@ echo.
 
 rem ---------- banco
 echo [1/4] Criando o banco de dados...
-set /p "PGPASSWORD=Digite a senha do usuario 'postgres' (definida na instalacao do PostgreSQL): "
+if not defined PGPASSWORD set /p "PGPASSWORD=Digite a senha do usuario 'postgres' (definida na instalacao do PostgreSQL): "
 "%PSQL%" -U postgres -h localhost -q -v ON_ERROR_STOP=1 -c "DO $$BEGIN IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname='subst') THEN CREATE ROLE subst LOGIN SUPERUSER PASSWORD 'subst'; END IF; END$$;"
 if errorlevel 1 (
   echo [ERRO] Nao foi possivel conectar ao PostgreSQL. Confira a senha e se o servico esta rodando.
