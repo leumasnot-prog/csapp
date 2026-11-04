@@ -51,6 +51,9 @@ entrar como diretora ou como Secretaria. Na tela de cada solicitação, o quadro
 **"Celular dos professores"** permite responder no lugar deles (Aceito/Recuso) e encerrar o
 prazo de uma onda. As regras são as mesmas da API real, e os dados ficam só naquele navegador.
 
+No Windows, também dá para abrir essa versão em **http://localhost:5173** com dois cliques em
+**`rodar-demo-windows.bat`** (precisa só do Node.js). Fora do Windows: `cd frontend && npm install && npm run demo`.
+
 Para gerar o arquivo de novo: `cd frontend && npm run build:demo`.
 
 ## Rodando no Windows (mais simples)
