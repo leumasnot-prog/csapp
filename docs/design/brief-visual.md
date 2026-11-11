@@ -18,10 +18,8 @@ O que agrada nelas, nas palavras de quem pediu:
 - **ícones flutuantes originais**, não genéricos;
 - **animação ligada à rolagem**.
 
-**As três referências ainda não foram vistas.** A rede da sessão em que este
-briefing foi escrito bloqueava os três endereços. Nenhuma decisão de cor, fonte ou
-composição abaixo foi tirada delas. Antes de fechar a direção, é preciso olhar os
-sites (liberando os domínios) ou receber capturas de tela.
+As três foram analisadas em 11/11/2026 (medidas de fonte, cor e raio, e capturas de
+tela). A direção que saiu delas está em [`DESIGN.md`](../../DESIGN.md).
 
 ## Onde cada pedido cabe
 
@@ -38,18 +36,19 @@ ela fica restrita à entrada e à apresentação.
 
 ## Já instalado
 
+- **Funnel Display** e **DM Sans** (pacotes `@fontsource-variable`).
 - **GSAP 3.15** e **@gsap/react 2.1** em `frontend/`. Gratuito, inclusive os plugins
   (ScrollTrigger, SplitText). Licença própria do GSAP, que permite uso comercial.
 - Skills em `.claude/skills/`: `frontend-design`, `impeccable` e sete do GSAP.
   Origem e critérios em [`.claude/skills/ORIGEM.md`](../../.claude/skills/ORIGEM.md).
 
-## A decidir depois de ver as referências
+## Decisões tomadas depois de ver as referências
 
-| Decisão | Proposta inicial | Por quê |
+| Decisão | Escolha | Por quê |
 |---|---|---|
 | Tema | Claro e escuro, definidos por tokens | O painel já segue o tema do aparelho |
-| Fonte | Uma família arredondada, servida pelo próprio sistema (pacote Fontsource), sem Google Fonts no ar | Não envia o endereço de quem acessa a terceiros; funciona em rede fechada |
-| Gráficos | Recharts, com cores e tipografia vindas dos tokens | Mais simples de manter em React; trocar por SVG próprio se o visual pedir |
+| Fonte | Funnel Display nos títulos (a mesma da Sevalla) e DM Sans no restante (usada pela Visor), servidas pelo próprio sistema via Fontsource | Formas redondas e amigáveis; licença aberta (OFL); não envia o endereço de quem acessa a terceiros |
+| Gráficos | SVG próprio, ligado aos tokens | O gráfico da Visor (traço em gradiente, marcador e etiqueta de valor) não sai de biblioteca pronta; são poucos tipos de gráfico. Recharts fica como alternativa se faltar interatividade |
 | Ícones | Conjunto próprio em SVG, desenhado para o vocabulário do produto (escola, onda, convocação, prazo, aceite, recusa, lista, relatório) | Pedido explícito: nada de biblioteca genérica |
 | Componentes acessíveis (diálogo, seleção, abas) | Radix quando o componente exigir | Teclado e leitor de tela corretos sem reescrever tudo |
 | Estilo | CSS com variáveis (tokens), sem framework de CSS | Os dois códigos em avaliação usam CSS puro; o design system fica portável |

@@ -11,6 +11,8 @@
     "demo": "vite --mode demo --port 5173 --open"
   },
   "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/funnel-display": "^5.3.0",
     "@gsap/react": "^2.1.2",
     "gsap": "^3.15.1",
     "react": "^19.1.0",
