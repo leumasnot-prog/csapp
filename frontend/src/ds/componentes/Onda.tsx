@@ -152,7 +152,7 @@ export function Onda({
         tl.from(".ds-onda-linha--aceita .ds-onda-realce", { scaleX: 0, transformOrigin: "0% 50%", duration: DURACAO.lenta })
           .from(".ds-onda-linha--aceita .ds-onda-posicao", { scale: 0.8, duration: DURACAO.media }, "<")
           .from(".ds-onda-linha--aceita .ds-selo", { opacity: 0, x: -6, duration: DURACAO.media }, "<0.05")
-          .from(".ds-onda-linha--recuada .ds-onda-pessoa", { opacity: 1, duration: DURACAO.lenta, ease: "none" }, "<")
+          .from(".ds-onda-linha--recuada :is(.ds-onda-nome, .ds-onda-posicao)", { opacity: 1, duration: DURACAO.lenta, ease: "none" }, "<")
           .from(".ds-onda-anel", { scale: 0.9, duration: DURACAO.media }, "<");
       });
       return () => mm.revert();
@@ -196,10 +196,12 @@ export function Onda({
                   <span aria-hidden="true">{c.posicao}º</span>
                   <span className="ds-so-leitor">{c.posicao}º na classificação:</span>
                 </span>
-                <span className="ds-onda-nome">{c.nome}</span>
+                <span className="ds-onda-textos">
+                  <span className="ds-onda-nome">{c.nome}</span>
+                  {c.detalhe && <span className="ds-onda-detalhe">{c.detalhe}</span>}
+                </span>
               </span>
               <span className="ds-onda-estado">
-                {c.detalhe && <span className="ds-onda-detalhe">{c.detalhe}</span>}
                 <Selo convocacao={c.estado} />
               </span>
             </li>

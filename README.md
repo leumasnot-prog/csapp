@@ -56,6 +56,13 @@ No Windows, também dá para abrir essa versão em **http://localhost:5173** com
 
 Para gerar o arquivo de novo: `cd frontend && npm run build:demo`.
 
+### Design system
+
+A página de referência do visual (cores, letras, componentes, ícones, objetos e
+gráficos) fica em `/design-system`. Na demonstração, abra
+`demo/substituicao-demo.html#design-system`. A direção está em [`DESIGN.md`](DESIGN.md)
+e o código em `frontend/src/ds/`.
+
 ## Rodando no Windows (mais simples)
 
 1. Instale, aceitando as opções padrão:

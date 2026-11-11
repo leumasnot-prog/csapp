@@ -41,27 +41,28 @@ function criar(nome: string, desenho: ReactNode) {
   return Icone;
 }
 
-/** Prédio escolar com frontão, sino na fachada e porta. */
+/** Prédio escolar: frontão com bandeira, janelas e porta em arco. */
 export const IconeEscola = criar(
   "Escola",
   <>
     <path d="M3 20.5h18" />
-    <path d="M5 20.5V10.2L12 5.5l7 4.7v10.3" />
-    <path d="M10 20.5v-4.25a2 2 0 0 1 4 0v4.25" />
-    <circle cx="12" cy="11" r="1.6" />
-    <path d="M12 5.5V3" />
-    <path d="M12 3h3l-.8 1 .8 1h-3" />
+    <path d="M5 20.5V10L12 5.5 19 10v10.5" />
+    <path d="M10 20.5v-4a2 2 0 0 1 4 0v4" />
+    <path d="M7.75 12.75h1.5" />
+    <path d="M14.75 12.75h1.5" />
+    <path d="M12 5.5V2.75" />
+    <path d="M12 2.75h3l-.75 1 .75 1h-3" />
   </>,
 );
 
-/** Professor: busto com um quadro ao lado. */
+/** Professor: busto em frente ao quadro, com uma linha escrita. */
 export const IconeProfessor = criar(
   "Professor",
   <>
-    <circle cx="8.5" cy="8.5" r="3" />
-    <path d="M3 20c0-3.3 2.46-5.5 5.5-5.5 1.6 0 3 .6 4 1.6" />
-    <rect x="13.5" y="3.5" width="7.5" height="6" rx="1.5" />
-    <path d="M11.5 14.5l3-3" />
+    <path d="M7.5 6V5.5A1.5 1.5 0 0 1 9 4h10.5A1.5 1.5 0 0 1 21 5.5v8a1.5 1.5 0 0 1-1.5 1.5H15" />
+    <path d="M13.5 8.5h4" />
+    <circle cx="8" cy="10.75" r="2.75" />
+    <path d="M3 20.5c0-2.9 2.24-5 5-5s5 2.1 5 5" />
   </>,
 );
 

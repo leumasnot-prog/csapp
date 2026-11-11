@@ -23,7 +23,7 @@ export function Indicador({ rotulo, valor, unidade, variacao, serie, descricaoSe
       <p className="ds-indicador-rotulo">{rotulo}</p>
       <p className="ds-indicador-valor">
         {valor}
-        {unidade && <span className="ds-indicador-unidade"> {unidade}</span>}
+        {unidade && <span className="ds-indicador-unidade">{unidade}</span>}
       </p>
       {variacao && <p className="ds-indicador-variacao">{variacao}</p>}
       {serie && serie.length > 1 && (

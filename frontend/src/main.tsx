@@ -1,4 +1,4 @@
-import { StrictMode, type ReactNode } from "react";
+import { StrictMode, Suspense, lazy, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, MemoryRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { DEMO } from "./api";
@@ -20,6 +20,9 @@ import Configuracao from "./pages/admin/Configuracao";
 import Auditoria from "./pages/admin/Auditoria";
 import "./styles.css";
 
+// Design system: página pública, carregada só quando aberta.
+const DesignSystem = lazy(() => import("./ds/PaginaDesignSystem"));
+
 function Protegida({ children, admin = false }: { children: ReactNode; admin?: boolean }) {
   const { usuario, carregando } = useAuth();
   const loc = useLocation();
@@ -35,6 +38,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+      <Route path="/design-system" element={<Suspense fallback={<Carregando />}><DesignSystem /></Suspense>} />
       <Route path="/" element={<Protegida><Painel /></Protegida>} />
       <Route path="/solicitacoes/nova" element={<Protegida><NovaSolicitacao /></Protegida>} />
       <Route path="/solicitacoes/:id" element={<Protegida><Acompanhamento /></Protegida>} />
@@ -52,7 +56,14 @@ function App() {
 
 // Na demonstração a navegação fica em memória: funciona aberta como arquivo
 // local ou dentro de outra página.
-const Router = DEMO ? MemoryRouter : BrowserRouter;
+// Na demonstração, o endereço "#/design-system" abre direto o design system.
+// A variável VITE_ENTRADA gera uma demonstração que já abre numa rota específica.
+const hashInicial = typeof window !== "undefined" ? window.location.hash : "";
+const entradaDemo =
+  import.meta.env.VITE_ENTRADA || (hashInicial === "#/design-system" || hashInicial === "#design-system" ? "/design-system" : "/");
+const Router = DEMO
+  ? ({ children }: { children: ReactNode }) => <MemoryRouter initialEntries={[entradaDemo]}>{children}</MemoryRouter>
+  : BrowserRouter;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
