@@ -1,0 +1,264 @@
+/* =====================================================================
+   Tokens do design system (DESIGN.md). Única fonte de cor do sistema:
+   nenhuma cor literal fora deste arquivo.
+
+   Todos os nomes começam com --ds- para não colidir com as variáveis do
+   painel atual (styles.css). Contraste conferido (WCAG AA) para cada par
+   texto/fundo usado pelos componentes; os valores medidos estão ao lado.
+   ===================================================================== */
+
+:root {
+  /* ---------------------------------------------------------- cores: base */
+  --ds-tinta: #0e1320;            /* texto principal: 18,5:1 no papel */
+  --ds-tinta-suave: #5a6477;      /* texto de apoio: 5,9:1 papel · 5,6:1 névoa · 5,2:1 céu */
+  --ds-papel: #ffffff;            /* cartões */
+  --ds-nevoa: #f6f8fc;            /* fundo da página */
+  --ds-ceu: #e9f1fe;              /* painéis de destaque */
+  --ds-ceu-forte: #d9e7fd;        /* trilho e bordas dentro do céu */
+  --ds-linha: #dfe5ef;            /* bordas de 1px */
+  --ds-linha-forte: #7f8ba1;      /* borda de campo: 3,4:1 papel · 3,2:1 névoa (WCAG 1.4.11) */
+
+  /* ---------------------------------------------------------- cores: ação */
+  --ds-azul: #1f4fe0;             /* ação principal; papel sobre azul 6,5:1 */
+  --ds-azul-profundo: #0b2a8f;    /* hover; papel sobre ele 12:1 */
+  --ds-azul-claro: #8fb4ff;       /* série secundária dos gráficos */
+  --ds-azul-texto: #1f4fe0;       /* azul como texto: 6,5:1 papel · 5,7:1 céu */
+  --ds-sobre-azul: #ffffff;       /* texto sobre o botão primário */
+  --ds-foco: #1f4fe0;             /* anel de foco */
+
+  /* ---------------------------------------------------------- cores: prazo */
+  --ds-laranja: #f97316;          /* anel de contagem, marcador, selo urgente */
+  --ds-laranja-texto: #b4500b;    /* laranja como texto: 5,1:1 papel · 4,5:1 céu */
+  --ds-laranja-fundo: #fff2e6;    /* fundo do selo urgente: texto 4,7:1 */
+  --ds-laranja-trilho: #fde3cc;   /* parte já consumida do anel */
+
+  /* ---------------------------------------------------------- cores: estados
+     DESIGN.md dá #0f8a4b e #d1343b; sobre os próprios fundos ficam em 3,8:1 e
+     4,1:1 (abaixo de AA). Essas duas continuam nas marcas (gráficos, ícones,
+     botão perigo); o texto dos selos usa os tons -texto, um passo abaixo. */
+  --ds-verde: #0f8a4b;
+  --ds-verde-texto: #0b6b3a;      /* 5,7:1 no verde-fundo · 6,6:1 papel */
+  --ds-verde-fundo: #dcf5e7;
+  --ds-vermelho: #d1343b;         /* botão perigo: papel sobre ele 4,9:1 */
+  --ds-vermelho-texto: #b3262d;   /* 5,5:1 no vermelho-fundo */
+  --ds-vermelho-fundo: #fde6e7;
+  --ds-ambar: #e0a030;            /* marca (rosca, ponto) — nunca texto */
+  --ds-ambar-texto: #8a5300;      /* 5,7:1 no âmbar-fundo */
+  --ds-ambar-fundo: #fff1d6;
+  --ds-neutro: #8b97ad;           /* marca neutra (rosca) */
+  --ds-neutro-texto: #4d5668;     /* 6,6:1 no neutro-fundo */
+  --ds-neutro-fundo: #edf0f5;
+  --ds-neutro-fundo-forte: #e1e6ee; /* hover do botão secundário */
+  --ds-sobre-perigo: #ffffff;
+
+  /* ---------------------------------------------------------- cores: peças */
+  --ds-pilula-fundo: #0e1320;     /* etiqueta de valor do gráfico */
+  --ds-pilula-texto: #ffffff;
+  --ds-veu: rgb(14 19 32 / 0.48); /* fundo atrás do diálogo */
+  --ds-selecao: #c9dafd;
+
+  /* ---------------------------------------------------------- objetos
+     Paleta própria das ilustrações: poucos tons, luz sempre do alto à
+     esquerda. Os tons claros/escuros de cada material formam o volume. */
+  --ds-obj-luz: #ffffff;
+  --ds-obj-azul-1: #7ea4ff;
+  --ds-obj-azul-2: #2f5ff0;
+  --ds-obj-azul-3: #1636a8;
+  --ds-obj-laranja-1: #ffb36b;
+  --ds-obj-laranja-2: #f97316;
+  --ds-obj-laranja-3: #c2520a;
+  --ds-obj-ouro-1: #ffe08a;
+  --ds-obj-ouro-2: #f2b72c;
+  --ds-obj-ouro-3: #b77a0c;
+  --ds-obj-madeira-1: #e7b07a;
+  --ds-obj-madeira-2: #c27f43;
+  --ds-obj-madeira-3: #8d5427;
+  --ds-obj-lousa-1: #3b6f63;
+  --ds-obj-lousa-2: #24493f;
+  --ds-obj-giz: #f4f7f2;
+  --ds-obj-papel-1: #ffffff;
+  --ds-obj-papel-2: #e6ecf6;
+  --ds-obj-metal-1: #f1f4f9;
+  --ds-obj-metal-2: #aab4c5;
+  --ds-obj-metal-3: #6c778b;
+  --ds-obj-tinta: #1b2236;
+  --ds-obj-tela: #f4f8ff;
+  --ds-obj-verde: #19a463;
+  --ds-obj-vermelho: #e2474e;
+  --ds-obj-sombra: rgb(14 19 32 / 0.22);
+
+  /* ---------------------------------------------------------- tipografia */
+  --ds-fonte-display: 'Funnel Display Variable', 'DM Sans Variable', system-ui, sans-serif;
+  --ds-fonte-texto: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* escala em rem */
+  --ds-tam-075: 0.75rem;
+  --ds-tam-0875: 0.875rem;
+  --ds-tam-1: 1rem;
+  --ds-tam-1125: 1.125rem;
+  --ds-tam-1375: 1.375rem;
+  --ds-tam-175: 1.75rem;
+  --ds-tam-225: 2.25rem;
+  --ds-tam-3: 3rem;
+  --ds-tam-4: 4rem;
+
+  /* papéis */
+  --ds-display-tamanho: var(--ds-tam-3);
+  --ds-display-peso: 600;
+  --ds-display-altura: 1.05;
+  --ds-display-espacamento: -0.03em;
+  --ds-titulo-tamanho: var(--ds-tam-1375);
+  --ds-titulo-peso: 600;
+  --ds-titulo-altura: 1.2;
+  --ds-titulo-espacamento: -0.015em;
+  --ds-corpo-tamanho: var(--ds-tam-1);
+  --ds-corpo-peso: 400;
+  --ds-corpo-altura: 1.5;
+  --ds-rotulo-tamanho: var(--ds-tam-0875);
+  --ds-rotulo-peso: 500;
+  --ds-rotulo-altura: 1.35;
+  --ds-enfase-peso: 600;
+
+  /* ---------------------------------------------------------- espaço */
+  --ds-esp-1: 4px;
+  --ds-esp-2: 8px;
+  --ds-esp-3: 12px;
+  --ds-esp-4: 16px;
+  --ds-esp-6: 24px;
+  --ds-esp-8: 32px;
+  --ds-esp-12: 48px;
+  --ds-esp-16: 64px;
+  --ds-alvo-toque: 44px;
+  --ds-largura-trabalho: 1100px;
+  --ds-largura-apresentacao: 1200px;
+
+  /* ---------------------------------------------------------- forma */
+  --ds-raio-controle: 10px;
+  --ds-raio-cartao: 16px;
+  --ds-raio-painel: 28px;
+  --ds-raio-pilula: 999px;
+  --ds-borda: 1px solid var(--ds-linha);
+  --ds-traco-icone: 1.75px;
+
+  /* ---------------------------------------------------------- profundidade */
+  --ds-sombra: 0 18px 40px -18px rgb(14 19 32 / 0.28);
+
+  /* ---------------------------------------------------------- movimento */
+  --ds-dur-rapida: 150ms;
+  --ds-dur-media: 200ms;
+  --ds-dur-lenta: 250ms;
+  --ds-curva-saida: cubic-bezier(0.22, 1, 0.36, 1);     /* expo-out */
+  --ds-curva-padrao: cubic-bezier(0.4, 0, 0.2, 1);
+  --ds-gsap-curva-saida: "expo.out";                  /* lido pelo JS */
+
+  /* superfície sob o elemento atual (anel dos marcadores dos gráficos) */
+  --ds-superficie-atual: var(--ds-papel);
+}
+
+/* ------------------------------------------------------------ tema escuro
+   Não é inversão: fundo azul-noite, superfícies que sobem em claridade,
+   azul mais claro com texto escuro por cima, estados claros sobre fundos
+   escuros do mesmo matiz. Medidas de contraste ao lado. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ds-tinta: #e8ecf5;            /* 16:1 no fundo · 13:1 no céu */
+    --ds-tinta-suave: #9aa6bd;      /* 7,7:1 fundo · 7,1:1 superfície · 6,2:1 elevada */
+    --ds-papel: #131a2e;
+    --ds-nevoa: #0b1020;
+    --ds-ceu: #15224a;
+    --ds-ceu-forte: #1f3166;
+    --ds-linha: #2a3552;
+    --ds-linha-forte: #5f6d92;
+
+    --ds-azul: #6f97ff;             /* fundo escuro sobre ele 6,8:1 */
+    --ds-azul-profundo: #93b2ff;    /* hover: 9,1:1 */
+    --ds-azul-claro: #3d5fb8;
+    --ds-azul-texto: #8fb0ff;       /* 7,2:1 no céu */
+    --ds-sobre-azul: #0b1020;
+    --ds-foco: #8fb0ff;
+
+    --ds-laranja: #fb8a3c;
+    --ds-laranja-texto: #ff9f5a;    /* 8,5:1 superfície · 7,6:1 céu */
+    --ds-laranja-fundo: #3a2112;
+    --ds-laranja-trilho: #3d2617;
+
+    --ds-verde: #4fcf8a;
+    --ds-verde-texto: #5fd897;      /* 8:1 no verde-fundo */
+    --ds-verde-fundo: #10301f;
+    --ds-vermelho: #ff7b81;         /* botão perigo com texto escuro: 7,6:1 */
+    --ds-vermelho-texto: #ff9095;   /* 7,4:1 */
+    --ds-vermelho-fundo: #3b1519;
+    --ds-ambar: #e8aa3e;
+    --ds-ambar-texto: #f4bd5c;      /* 8,7:1 */
+    --ds-ambar-fundo: #352509;
+    --ds-neutro: #6d7a96;
+    --ds-neutro-texto: #a3b0c9;     /* 6,3:1 no neutro-fundo */
+    --ds-neutro-fundo: #232d47;
+    --ds-neutro-fundo-forte: #2c3856;
+    --ds-sobre-perigo: #0b1020;
+
+    --ds-pilula-fundo: #e8ecf5;
+    --ds-pilula-texto: #0b1020;
+    --ds-veu: rgb(3 6 14 / 0.66);
+    --ds-selecao: #2b4a9e;
+
+    --ds-obj-luz: #e9efff;
+    --ds-obj-papel-1: #f3f6fb;
+    --ds-obj-papel-2: #cfd8e8;
+    --ds-obj-tela: #e8eefb;
+    --ds-obj-sombra: rgb(0 0 0 / 0.5);
+
+    --ds-sombra: 0 18px 40px -18px rgb(0 0 0 / 0.7);
+  }
+}
+
+:root[data-theme="dark"] {
+  --ds-tinta: #e8ecf5;
+  --ds-tinta-suave: #9aa6bd;
+  --ds-papel: #131a2e;
+  --ds-nevoa: #0b1020;
+  --ds-ceu: #15224a;
+  --ds-ceu-forte: #1f3166;
+  --ds-linha: #2a3552;
+  --ds-linha-forte: #5f6d92;
+
+  --ds-azul: #6f97ff;
+  --ds-azul-profundo: #93b2ff;
+  --ds-azul-claro: #3d5fb8;
+  --ds-azul-texto: #8fb0ff;
+  --ds-sobre-azul: #0b1020;
+  --ds-foco: #8fb0ff;
+
+  --ds-laranja: #fb8a3c;
+  --ds-laranja-texto: #ff9f5a;
+  --ds-laranja-fundo: #3a2112;
+  --ds-laranja-trilho: #3d2617;
+
+  --ds-verde: #4fcf8a;
+  --ds-verde-texto: #5fd897;
+  --ds-verde-fundo: #10301f;
+  --ds-vermelho: #ff7b81;
+  --ds-vermelho-texto: #ff9095;
+  --ds-vermelho-fundo: #3b1519;
+  --ds-ambar: #e8aa3e;
+  --ds-ambar-texto: #f4bd5c;
+  --ds-ambar-fundo: #352509;
+  --ds-neutro: #6d7a96;
+  --ds-neutro-texto: #a3b0c9;
+  --ds-neutro-fundo: #232d47;
+  --ds-neutro-fundo-forte: #2c3856;
+  --ds-sobre-perigo: #0b1020;
+
+  --ds-pilula-fundo: #e8ecf5;
+  --ds-pilula-texto: #0b1020;
+  --ds-veu: rgb(3 6 14 / 0.66);
+  --ds-selecao: #2b4a9e;
+
+  --ds-obj-luz: #e9efff;
+  --ds-obj-papel-1: #f3f6fb;
+  --ds-obj-papel-2: #cfd8e8;
+  --ds-obj-tela: #e8eefb;
+  --ds-obj-sombra: rgb(0 0 0 / 0.5);
+
+  --ds-sombra: 0 18px 40px -18px rgb(0 0 0 / 0.7);
+}
