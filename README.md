@@ -60,7 +60,10 @@ Para gerar o arquivo de novo: `cd frontend && npm run build:demo`.
 
 A página de referência do visual (cores, letras, componentes, ícones, objetos e
 gráficos) fica em `/design-system`. Na demonstração, abra
-`demo/substituicao-demo.html#design-system`. A direção está em [`DESIGN.md`](DESIGN.md)
+`demo/substituicao-demo.html#design-system`.
+
+A apresentação do sistema, com a história de uma convocação guiada pela rolagem,
+fica em `/apresentacao` (na demonstração, `demo/substituicao-demo.html#apresentacao`). A direção está em [`DESIGN.md`](DESIGN.md)
 e o código em `frontend/src/ds/`.
 
 ## Rodando no Windows (mais simples)
