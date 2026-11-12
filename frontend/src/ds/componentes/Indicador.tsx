@@ -16,7 +16,7 @@ export interface PropsIndicador {
   className?: string;
 }
 
-/** Indicador: número grande em Funnel Display, rótulo e, se fizer sentido, um minigráfico. */
+/** Indicador: número grande na fonte de título (Oxanium), rótulo e, se fizer sentido, um minigráfico. */
 export function Indicador({ rotulo, valor, unidade, variacao, serie, descricaoSerie, className }: PropsIndicador) {
   return (
     <div className={["ds-indicador", className].filter(Boolean).join(" ")}>

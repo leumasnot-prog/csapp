@@ -22,13 +22,13 @@ colors:
   neutro-fundo: "#edf0f5"
 typography:
   display:
-    fontFamily: "'Funnel Display Variable', 'DM Sans Variable', system-ui, sans-serif"
+    fontFamily: "'Oxanium Variable', 'DM Sans Variable', system-ui, sans-serif"
     fontSize: "3rem"
     fontWeight: 600
     lineHeight: 1.05
     letterSpacing: "-0.03em"
   titulo:
-    fontFamily: "'Funnel Display Variable', 'DM Sans Variable', system-ui, sans-serif"
+    fontFamily: "'Oxanium Variable', 'DM Sans Variable', system-ui, sans-serif"
     fontSize: "1.375rem"
     fontWeight: 600
     lineHeight: 1.2
@@ -138,10 +138,14 @@ gráficos. É onde o design gasta sua ousadia; o resto fica quieto.
 
 ## Typography
 
-- **Funnel Display** (variável, 300 a 800) em títulos e números grandes, peso 600,
+- **Oxanium** (variável, 200 a 800) em títulos e números grandes, peso 600,
   espaçamento entre letras de -0,03em nos tamanhos grandes e -0,015em nos médios.
 - **DM Sans** (variável) em todo o resto: 400 no corpo, 500 em rótulos e botões, 600
   em ênfase.
+- A Oxanium, de formas quadradas com cantos suaves, foi escolhida por quem
+  encomendou o trabalho, no lugar da Funnel Display da primeira proposta.
+- A Oxanium só entra a partir de 1,125rem. Abaixo disso ela perde legibilidade;
+  texto pequeno é sempre DM Sans.
 - As duas são servidas pelo próprio sistema (pacotes Fontsource), sem chamada a
   servidor de fontes externo.
 - Escala em rem: 0,75 · 0,875 · 1 · 1,125 · 1,375 · 1,75 · 2,25 · 3 · 4.
@@ -190,7 +194,7 @@ gráficos. É onde o design gasta sua ousadia; o resto fica quieto.
 - **Onda:** a peça de assinatura. Mostra o número da onda, o prazo com anel de
   contagem em laranja e a fila de professores chamados com posição, nome e selo.
   Quando alguém aceita, a linha dele ganha destaque verde e as outras recuam.
-- **Indicador:** número grande em Funnel Display com rótulo e, quando fizer sentido,
+- **Indicador:** número grande em Oxanium com rótulo e, quando fizer sentido,
   um minigráfico.
 - **Gráficos** em SVG próprio, ligados aos tokens: linha com área (gradiente no
   traço, marcador e etiqueta de valor), barras, rosca e minigráfico. Cada gráfico tem

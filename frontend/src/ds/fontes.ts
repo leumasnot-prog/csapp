@@ -7,8 +7,8 @@
 // com hash, baixados só quando esta parte do painel abre.
 import dmUrl from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url";
 import dmEmbutida from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url&inline";
-import funnelUrl from "@fontsource-variable/funnel-display/files/funnel-display-latin-wght-normal.woff2?url";
-import funnelEmbutida from "@fontsource-variable/funnel-display/files/funnel-display-latin-wght-normal.woff2?url&inline";
+import oxaniumUrl from "@fontsource-variable/oxanium/files/oxanium-latin-wght-normal.woff2?url";
+import oxaniumEmbutida from "@fontsource-variable/oxanium/files/oxanium-latin-wght-normal.woff2?url&inline";
 
 const EMBUTIR = import.meta.env.MODE === "demo";
 
@@ -27,8 +27,8 @@ export function carregarFontes() {
       display: "swap",
       unicodeRange: FAIXA_LATINA,
     }),
-    new FontFace("Funnel Display Variable", `url(${EMBUTIR ? funnelEmbutida : funnelUrl}) format("woff2")`, {
-      weight: "300 800",
+    new FontFace("Oxanium Variable", `url(${EMBUTIR ? oxaniumEmbutida : oxaniumUrl}) format("woff2")`, {
+      weight: "200 800",
       style: "normal",
       display: "swap",
       unicodeRange: FAIXA_LATINA,

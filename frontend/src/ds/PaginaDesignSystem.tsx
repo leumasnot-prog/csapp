@@ -335,16 +335,16 @@ export default function PaginaDesignSystem() {
         </Secao>
 
         {/* ---------------------------------------------------------- tipografia */}
-        <Secao id="ds-tipografia" titulo="Tipografia" intro="Funnel Display nos títulos e números grandes; DM Sans em todo o resto. As duas servidas pelo próprio painel.">
+        <Secao id="ds-tipografia" titulo="Tipografia" intro="Oxanium nos títulos e números grandes; DM Sans em todo o resto. As duas servidas pelo próprio painel.">
           <div className="ds-pg-tipos">
             <Cartao className="ds-pg-papeis">
               <div className="ds-pg-papel">
                 <p className="ds-display">Vaga preenchida em 6 minutos</p>
-                <p className="ds-pg-meta">Display: Funnel Display 600, 3rem, entrelinha 1,05, espaçamento −0,03em</p>
+                <p className="ds-pg-meta">Display: Oxanium 600, 3rem, entrelinha 1,05, espaçamento −0,03em</p>
               </div>
               <div className="ds-pg-papel">
                 <p className="ds-titulo">Acompanhamento da solicitação</p>
-                <p className="ds-pg-meta">Título: Funnel Display 600, 1,375rem, espaçamento −0,015em</p>
+                <p className="ds-pg-meta">Título: Oxanium 600, 1,375rem, espaçamento −0,015em</p>
               </div>
               <div className="ds-pg-papel">
                 <p className="ds-corpo">A convocação sai em ondas: os primeiros elegíveis da fila recebem ao mesmo tempo, com prazo para responder.</p>

@@ -36,7 +36,7 @@ ela fica restrita à entrada e à apresentação.
 
 ## Já instalado
 
-- **Funnel Display** e **DM Sans** (pacotes `@fontsource-variable`).
+- **Oxanium** e **DM Sans** (pacotes `@fontsource-variable`).
 - **GSAP 3.15** e **@gsap/react 2.1** em `frontend/`. Gratuito, inclusive os plugins
   (ScrollTrigger, SplitText). Licença própria do GSAP, que permite uso comercial.
 - Skills em `.claude/skills/`: `frontend-design`, `impeccable` e sete do GSAP.
@@ -47,7 +47,7 @@ ela fica restrita à entrada e à apresentação.
 | Decisão | Escolha | Por quê |
 |---|---|---|
 | Tema | Claro e escuro, definidos por tokens | O painel já segue o tema do aparelho |
-| Fonte | Funnel Display nos títulos (a mesma da Sevalla) e DM Sans no restante (usada pela Visor), servidas pelo próprio sistema via Fontsource | Formas redondas e amigáveis; licença aberta (OFL); não envia o endereço de quem acessa a terceiros |
+| Fonte | Oxanium nos títulos e números grandes, DM Sans no restante (usada pela Visor), servidas pelo próprio sistema via Fontsource | A Oxanium, mais quadrada, foi escolhida entre cinco opções depois da primeira entrega, no lugar da Funnel Display; licença aberta (OFL); não envia o endereço de quem acessa a terceiros |
 | Gráficos | SVG próprio, ligado aos tokens | O gráfico da Visor (traço em gradiente, marcador e etiqueta de valor) não sai de biblioteca pronta; são poucos tipos de gráfico. Recharts fica como alternativa se faltar interatividade |
 | Ícones | Conjunto próprio em SVG, desenhado para o vocabulário do produto (escola, onda, convocação, prazo, aceite, recusa, lista, relatório) | Pedido explícito: nada de biblioteca genérica |
 | Componentes acessíveis (diálogo, seleção, abas) | Radix quando o componente exigir | Teclado e leitor de tela corretos sem reescrever tudo |
