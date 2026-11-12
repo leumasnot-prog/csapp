@@ -40,6 +40,12 @@ export interface PropsOnda {
   repetir?: number;
   /** Nível do título (padrão 3). */
   nivelTitulo?: 2 | 3 | 4;
+  /**
+   * Falso quando quem usa controla o tempo (ex.: a história da apresentação,
+   * guiada pela rolagem): a onda não anima sozinha e o anel segue o `agora`
+   * sem transição. Padrão: verdadeiro.
+   */
+  animar?: boolean;
   className?: string;
 }
 
@@ -96,7 +102,7 @@ function Anel({ fracao, estado, texto }: { fracao: number; estado: "correndo" | 
  * dele ganha o destaque verde e as outras recuam.
  */
 export function Onda({
-  numero, enviadaEm, prazoAte, agora, convocados, pulados = [], contexto, urgente, aceiteEm, repetir = 0, nivelTitulo = 3, className,
+  numero, enviadaEm, prazoAte, agora, convocados, pulados = [], contexto, urgente, aceiteEm, repetir = 0, nivelTitulo = 3, animar = true, className,
 }: PropsOnda) {
   const raiz = useRef<HTMLElement>(null);
   const indiceAceito = convocados.findIndex((c) => c.estado === "aceitou");
@@ -128,6 +134,7 @@ export function Onda({
   // Entrada: a onda nova chega (cabeçalho, anel e linhas em sequência curta).
   useGSAP(
     () => {
+      if (!animar) return;
       const mm = gsap.matchMedia();
       mm.add(COM_MOVIMENTO, () => {
         const tl = gsap.timeline({ defaults: { ease: CURVA_SAIDA } });
@@ -137,7 +144,7 @@ export function Onda({
       });
       return () => mm.revert();
     },
-    { dependencies: [repetir, numero], scope: raiz, revertOnUpdate: true },
+    { dependencies: [repetir, numero, animar], scope: raiz, revertOnUpdate: true },
   );
 
   // Aceite: o destaque verde varre a linha e as outras recuam.
@@ -145,7 +152,7 @@ export function Onda({
     () => {
       const mudou = aceitoAntes.current !== indiceAceito;
       aceitoAntes.current = indiceAceito;
-      if (!mudou || indiceAceito < 0) return;
+      if (!mudou || indiceAceito < 0 || !animar) return;
       const mm = gsap.matchMedia();
       mm.add(COM_MOVIMENTO, () => {
         const tl = gsap.timeline({ defaults: { ease: CURVA_SAIDA } });
@@ -163,7 +170,7 @@ export function Onda({
   return (
     <section
       ref={raiz}
-      className={["ds-onda", `ds-onda--${estadoAnel}`, className].filter(Boolean).join(" ")}
+      className={["ds-onda", `ds-onda--${estadoAnel}`, !animar && "ds-onda--controlada", className].filter(Boolean).join(" ")}
       aria-label={`Onda ${numero}`}
     >
       <header className="ds-onda-cabeca">
@@ -224,5 +231,26 @@ export function Onda({
         </div>
       )}
     </section>
+  );
+}
+
+export interface PropsResumoOnda {
+  numero: number;
+  /** O que aconteceu (ex.: "1 recusa e 2 sem resposta"). */
+  resumo: string;
+  /** Quando a onda se encerrou. */
+  encerradaEm: Instante;
+  className?: string;
+}
+
+/** Onda já encerrada, em uma linha: fica acima da onda seguinte no acompanhamento. */
+export function ResumoOnda({ numero, resumo, encerradaEm, className }: PropsResumoOnda) {
+  return (
+    <p className={["ds-onda-resumo", className].filter(Boolean).join(" ")}>
+      <span className="ds-onda-resumo-numero">Onda {numero}</span>
+      <span className="ds-onda-resumo-texto">
+        encerrada às <span className="ds-num">{formatarHora(encerradaEm)}</span>: {resumo}
+      </span>
+    </p>
   );
 }

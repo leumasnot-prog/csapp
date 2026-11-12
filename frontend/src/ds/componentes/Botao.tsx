@@ -15,6 +15,11 @@ export interface PropsBotao extends ButtonHTMLAttributes<HTMLButtonElement> {
   largo?: boolean;
 }
 
+/** Classes do botão, para um link que tem cara de botão (ex.: "Entrar" que leva a outra página). */
+export function classesBotao({ variante = "primario", tamanho = "normal", largo }: { variante?: VarianteBotao; tamanho?: TamanhoBotao; largo?: boolean } = {}) {
+  return ["ds-botao", `ds-botao--${variante}`, `ds-botao--${tamanho}`, largo && "ds-botao--largo"].filter(Boolean).join(" ");
+}
+
 /** Botão do design system: primário (azul), secundário (neutro), perigo (vermelho) e texto. */
 export const Botao = forwardRef<HTMLButtonElement, PropsBotao>(function Botao(
   { variante = "primario", tamanho = "normal", carregando = false, textoCarregando, icone, iconeFim, largo, className, children, disabled, type = "button", ...resto },

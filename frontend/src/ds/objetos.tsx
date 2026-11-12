@@ -89,7 +89,7 @@ function Moldura({ tamanho = 160, titulo, className, style, children }: PropsObj
 
 /* ------------------------------------------------------------------ sino */
 
-/** Sino de mão da escola, inclinado como se estivesse tocando. */
+/** Sino de mão da escola, inclinado e com o badalo balançando: está tocando. */
 export function ObjetoSino(p: PropsObjeto) {
   const id = useIds();
   return (
@@ -98,34 +98,37 @@ export function ObjetoSino(p: PropsObjeto) {
         <Grad id={id("corpo")} de="ouro-1" meio="ouro-2" ate="ouro-3" x2={1} y2={0.35} />
         <Grad id={id("boca")} de="ouro-2" ate="ouro-3" x1={0} y1={0} x2={1} y2={0} />
         <Grad id={id("cabo")} de="azul-1" meio="azul-2" ate="azul-3" x2={1} y2={0} />
-        <Grad id={id("badalo")} de="metal-2" ate="metal-3" />
+        <Grad id={id("badalo")} de="metal-1" meio="metal-2" ate="metal-3" />
         <Brilho id={id("brilho")} x1={0} y1={0} x2={0} y2={1} forca={0.85} />
       </defs>
-      <Sombra id={id("sombra")} cx={78} rx={40} />
-      <g transform="rotate(-14 80 92)">
+      <Sombra id={id("sombra")} cx={80} rx={42} />
+      <g transform="rotate(-14 80 88)">
         {/* cabo de madeira pintada */}
-        <rect x="70" y="14" width="20" height="46" rx="10" fill={`url(#${id("cabo")})`} />
-        <rect x="74" y="20" width="4" height="30" rx="2" fill={`url(#${id("brilho")})`} />
-        <ellipse cx="80" cy="60" rx="13" ry="5" style={pinta("ouro-3")} />
+        <rect x="70" y="10" width="20" height="46" rx="10" fill={`url(#${id("cabo")})`} />
+        <rect x="74" y="16" width="4" height="30" rx="2" fill={`url(#${id("brilho")})`} />
+        <ellipse cx="80" cy="56" rx="13" ry="5" style={pinta("ouro-3")} />
         {/* corpo */}
         <path
-          d="M80 58c-17 0-26 13-27.5 31-1.3 16-5.5 25-15.5 32h86c-10-7-14.2-16-15.5-32C106 71 97 58 80 58z"
+          d="M80 54c-17 0-26 13-27.5 31-1.3 16-5.5 25-15.5 32h86c-10-7-14.2-16-15.5-32C106 67 97 54 80 54z"
           fill={`url(#${id("corpo")})`}
         />
         {/* faixa decorativa */}
-        <path d="M51.6 100c18 4 38.8 4 56.8 0" fill="none" style={{ stroke: cor("ouro-3"), strokeOpacity: 0.45 }} strokeWidth="3" strokeLinecap="round" />
+        <path d="M51.6 96c18 4 38.8 4 56.8 0" fill="none" style={{ stroke: cor("ouro-3"), strokeOpacity: 0.45 }} strokeWidth="3" strokeLinecap="round" />
         {/* brilho do lado da luz */}
-        <path d="M66 70c-5 6-7 16-8 28" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.7 }} strokeWidth="5" strokeLinecap="round" />
-        {/* badalo e boca */}
-        <circle cx="80" cy="129" r="7" fill={`url(#${id("badalo")})`} />
-        <ellipse cx="80" cy="121" rx="44" ry="8" fill={`url(#${id("boca")})`} />
-        <ellipse cx="80" cy="119.5" rx="36" ry="4.5" style={pinta("ouro-3")} />
+        <path d="M66 66c-5 6-7 16-8 28" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.7 }} strokeWidth="5" strokeLinecap="round" />
+        {/* boca: aro e o escuro de dentro */}
+        <ellipse cx="80" cy="117" rx="44" ry="8.5" fill={`url(#${id("boca")})`} />
+        <ellipse cx="80" cy="117.5" rx="37" ry="5.5" style={{ fill: cor("tinta"), opacity: 0.55 }} />
+        {/* badalo: haste saindo do escuro e a bola balançando para fora da boca */}
+        <path d="M80 117l13 15" fill="none" style={{ stroke: cor("metal-3") }} strokeWidth="4" strokeLinecap="round" />
+        <circle cx="96" cy="135" r="9" fill={`url(#${id("badalo")})`} />
+        <circle cx="93" cy="132" r="2.8" style={{ fill: cor("luz"), opacity: 0.85 }} />
       </g>
       {/* linhas de toque */}
       <g fill="none" style={{ stroke: cor("laranja-2") }} strokeWidth="4" strokeLinecap="round">
-        <path d="M128 52l10-8" />
-        <path d="M134 70l13-2" />
-        <path d="M30 48l-9-9" />
+        <path d="M128 48l10-8" />
+        <path d="M134 66l13-2" />
+        <path d="M30 44l-9-9" />
       </g>
     </Moldura>
   );
@@ -217,26 +220,36 @@ export function ObjetoMegafone(p: PropsObjeto) {
   return (
     <Moldura {...p}>
       <defs>
-        <Grad id={id("cone")} de="laranja-1" meio="laranja-2" ate="laranja-3" x1={0} y1={0} x2={0.2} y2={1} />
+        {/* cone visto de lado: luz em cima, sombra embaixo */}
+        <Grad id={id("cone")} de="laranja-1" meio="laranja-2" ate="laranja-3" x1={0} y1={0} x2={0} y2={1} />
         <Grad id={id("aro")} de="laranja-1" ate="laranja-3" x1={0} y1={0} x2={1} y2={1} />
-        <Grad id={id("cabo")} de="azul-2" ate="azul-3" />
+        <Grad id={id("faixa")} de="papel-1" ate="papel-2" x1={0} y1={0} x2={0} y2={1} />
+        <Grad id={id("traseira")} de="azul-1" meio="azul-2" ate="azul-3" x1={0} y1={0} x2={0} y2={1} />
+        <Grad id={id("cabo")} de="azul-2" ate="azul-3" x1={0} y1={0} x2={1} y2={0} />
       </defs>
-      <Sombra id={id("sombra")} cx={76} rx={46} />
-      <g transform="rotate(-16 80 84)">
-        {/* empunhadura */}
-        <path d="M58 92l-5 30a5 5 0 0 0 5 6h8a5 5 0 0 0 5-4.4L74 96z" fill={`url(#${id("cabo")})`} />
-        {/* traseira */}
-        <rect x="24" y="66" width="22" height="32" rx="9" style={pinta("azul-3")} />
+      <Sombra id={id("sombra")} cx={78} rx={48} />
+      <g transform="rotate(-14 80 84)">
+        {/* empunhadura de pistola, presa embaixo do cone */}
+        <path d="M57 96h17l-3.5 31a6.5 6.5 0 0 1-6.5 5.8h-4.4a6.5 6.5 0 0 1-6.4-7.4z" fill={`url(#${id("cabo")})`} />
+        <path d="M59.5 104l-2 20" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.45 }} strokeWidth="2.5" strokeLinecap="round" />
+        {/* gatilho e o arco que o protege */}
+        <path d="M74 101.5c7 1.5 10 7 8.5 14.5l-10 .5" fill="none" style={{ stroke: cor("azul-3") }} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="72" y="104" width="5" height="8" rx="2.5" style={pinta("azul-2")} />
+        {/* traseira arredondada e o anel que a liga ao cone */}
+        <rect x="22" y="66" width="26" height="32" rx="11" fill={`url(#${id("traseira")})`} />
+        <path d="M30 70.5h10" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.55 }} strokeWidth="3" strokeLinecap="round" />
         {/* cone */}
-        <path d="M42 68L110 42c4-1.5 8 1.4 8 5.6v68.8c0 4.2-4 7.1-8 5.6L42 96z" fill={`url(#${id("cone")})`} />
-        {/* faixa branca */}
-        <path d="M76 55.4v53.2" fill="none" style={{ stroke: cor("papel-1") }} strokeWidth="9" />
-        {/* brilho de cima */}
-        <path d="M48 69.5L104 48" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.6 }} strokeWidth="3.5" strokeLinecap="round" />
+        <path d="M44 68L116 42v80L44 96z" fill={`url(#${id("cone")})`} />
+        <rect x="41" y="65.5" width="8" height="33" rx="4" style={pinta("azul-3")} />
+        {/* brilho de cima, ao longo da aresta iluminada */}
+        <path d="M52 69.5L108 49" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.55 }} strokeWidth="3.5" strokeLinecap="round" />
+        {/* faixa branca: um anel que abraça o cone, curvo como a boca */}
+        <path d="M72 57.9A6 24.1 0 0 1 72 106.1L85 110.8A7.4 28.8 0 0 0 85 53.2z" fill={`url(#${id("faixa")})`} />
+        <path d="M73.6 60.4A6 22 0 0 1 77.6 70" fill="none" style={{ stroke: cor("luz") }} strokeWidth="2" strokeLinecap="round" />
         {/* boca: aro e abertura */}
-        <ellipse cx="118" cy="82" rx="11" ry="42" fill={`url(#${id("aro")})`} />
-        <ellipse cx="120" cy="82" rx="7" ry="35" style={pinta("laranja-3")} />
-        <ellipse cx="121.5" cy="84" rx="4" ry="26" style={{ fill: cor("tinta"), opacity: 0.35 }} />
+        <ellipse cx="116" cy="82" rx="11" ry="41" fill={`url(#${id("aro")})`} />
+        <ellipse cx="118" cy="82" rx="7" ry="34" style={pinta("laranja-3")} />
+        <ellipse cx="119.5" cy="84" rx="4" ry="25" style={{ fill: cor("tinta"), opacity: 0.35 }} />
       </g>
       {/* ondas de som */}
       <g fill="none" style={{ stroke: cor("azul-2") }} strokeWidth="5" strokeLinecap="round">
@@ -342,7 +355,7 @@ export function ObjetoCalendario(p: PropsObjeto) {
 
 /* ---------------------------------------------------------------- mochila */
 
-/** Mochila escolar com bolso da frente e puxador laranja. */
+/** Mochila escolar: alças das costas com fivela, bolso da frente e zíper com puxador. */
 export function ObjetoMochila(p: PropsObjeto) {
   const id = useIds();
   return (
@@ -350,24 +363,35 @@ export function ObjetoMochila(p: PropsObjeto) {
       <defs>
         <Grad id={id("corpo")} de="azul-1" meio="azul-2" ate="azul-3" x2={0.9} y2={0.8} />
         <Grad id={id("bolso")} de="azul-1" ate="azul-2" x2={0.7} />
+        <Grad id={id("alca")} de="azul-2" ate="azul-3" x1={0} y1={0} x2={1} y2={0} />
+        <Grad id={id("metal")} de="metal-1" meio="metal-2" ate="metal-3" />
+        <Grad id={id("puxador")} de="laranja-1" ate="laranja-3" x1={0} y1={0} x2={1} y2={1} />
         <Brilho id={id("brilho")} forca={0.55} x2={1} y2={0.3} />
       </defs>
-      <Sombra id={id("sombra")} rx={46} />
+      <Sombra id={id("sombra")} rx={50} />
       {/* alça de mão */}
       <path d="M66 38V30a14 14 0 0 1 28 0v8" fill="none" style={{ stroke: cor("azul-3") }} strokeWidth="7" strokeLinecap="round" />
-      {/* alças das costas, aparecendo dos lados */}
-      <path d="M40 66c-8 10-9 34-4 56" fill="none" style={{ stroke: cor("azul-3") }} strokeWidth="7" strokeLinecap="round" />
-      <path d="M120 66c8 10 9 34 4 56" fill="none" style={{ stroke: cor("azul-3") }} strokeWidth="7" strokeLinecap="round" />
+      {/* alças das costas: tiras largas que saem de trás, descem e voltam embaixo */}
+      <path d="M52 50C30 56 20 92 27 130l12 1c-5-32-1-62 15-74z" fill={`url(#${id("alca")})`} />
+      <path d="M108 50c22 6 32 42 25 80l-12 1c5-32 1-62-15-74z" fill={`url(#${id("alca")})`} />
+      <path d="M38 64c-9 14-11 38-7 62" fill="none" style={{ stroke: cor("azul-1"), strokeOpacity: 0.7 }} strokeWidth="1.5" strokeDasharray="3 3" strokeLinecap="round" />
+      {/* fivelas de ajuste */}
+      <rect x="24" y="108" width="15" height="8" rx="2.5" transform="rotate(-4 31 112)" fill={`url(#${id("metal")})`} />
+      <rect x="121" y="108" width="15" height="8" rx="2.5" transform="rotate(4 129 112)" fill={`url(#${id("metal")})`} />
       {/* corpo */}
       <path d="M80 34c-24 0-38 12-38 32v58c0 9 6 16 15 16h46c9 0 15-7 15-16V66c0-20-14-32-38-32z" fill={`url(#${id("corpo")})`} />
       <path d="M50 64c2-12 12-20 28-21" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.5 }} strokeWidth="4" strokeLinecap="round" />
-      {/* tampa */}
+      {/* tampa, com o zíper de cima */}
       <path d="M44 74c22 6 50 6 72 0" fill="none" style={{ stroke: cor("azul-3"), strokeOpacity: 0.55 }} strokeWidth="3" strokeLinecap="round" />
-      {/* bolso */}
-      <rect x="52" y="92" width="56" height="40" rx="14" fill={`url(#${id("bolso")})`} />
-      <path d="M56 104h48" fill="none" style={{ stroke: cor("azul-3"), strokeOpacity: 0.6 }} strokeWidth="2.5" strokeLinecap="round" />
-      <rect x="92" y="102" width="7" height="16" rx="3.5" style={pinta("laranja-2")} />
-      <rect x="54" y="94" width="30" height="6" rx="3" fill={`url(#${id("brilho")})`} />
+      {/* bolso da frente */}
+      <rect x="50" y="90" width="60" height="42" rx="14" fill={`url(#${id("bolso")})`} />
+      <rect x="54" y="92" width="30" height="5" rx="2.5" fill={`url(#${id("brilho")})`} />
+      {/* zíper do bolso: dentes, cursor de metal e o puxador laranja pendurado */}
+      <path d="M58 103h44" fill="none" style={{ stroke: cor("azul-3"), strokeOpacity: 0.75 }} strokeWidth="3" strokeDasharray="2 2" />
+      <rect x="86" y="99.5" width="9" height="7" rx="2" fill={`url(#${id("metal")})`} />
+      <path d="M90.5 106.5v3" fill="none" style={{ stroke: cor("metal-3") }} strokeWidth="2" strokeLinecap="round" />
+      <path d="M86.5 109.5h8l1.5 12a4.5 4.5 0 0 1-4.5 5h-2a4.5 4.5 0 0 1-4.5-5z" transform="rotate(8 90.5 109.5)" fill={`url(#${id("puxador")})`} />
+      <path d="M88.3 112.5l.6 7" transform="rotate(8 90.5 109.5)" fill="none" style={{ stroke: cor("luz"), strokeOpacity: 0.6 }} strokeWidth="1.6" strokeLinecap="round" />
     </Moldura>
   );
 }

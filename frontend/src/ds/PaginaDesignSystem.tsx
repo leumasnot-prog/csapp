@@ -601,7 +601,10 @@ export default function PaginaDesignSystem() {
 
       <footer className="ds-pg-rodape">
         <p>Página de referência do design system. Todos os nomes, escolas e números são dados de exemplo.</p>
-        <Link to="/login">Ir para a entrada do painel</Link>
+        <nav className="ds-pg-rodape-links" aria-label="Outras páginas">
+          <Link to="/apresentacao">Ver a apresentação</Link>
+          <Link to="/login">Ir para a entrada do painel</Link>
+        </nav>
       </footer>
 
       <Dialogo

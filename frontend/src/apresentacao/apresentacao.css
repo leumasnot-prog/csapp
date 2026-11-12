@@ -1,0 +1,310 @@
+/* Página /apresentacao (só a composição desta página; peças em ds/componentes.css).
+   Cores só por tokens. As condições FIXADA e SEQUENCIA_ANIMADA têm de ser as
+   mesmas de Historia.tsx. */
+
+.ds-ap-largura {
+  width: 100%;
+  max-width: calc(var(--ds-largura-apresentacao) + 2 * var(--ds-esp-8));
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 640px) {
+  .ds-ap-largura { padding-left: var(--ds-esp-8); padding-right: var(--ds-esp-8); }
+}
+
+/* foco: o painel antigo tem um anel próprio em button e a; aqui vale o do sistema */
+.ds-ap :is(a, button, [tabindex]):focus-visible { outline: 2px solid var(--ds-foco); outline-offset: 2px; }
+
+/* ------------------------------------------------------------ marca e topo */
+.ds-ap-marca { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
+.ds-ap-marca-simbolo {
+  display: inline-grid; place-items: center; flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: var(--ds-raio-controle);
+  background: var(--ds-azul);
+  color: var(--ds-sobre-azul);
+}
+.ds-ap-marca-simbolo--mini { width: 22px; height: 22px; border-radius: 6px; }
+.ds-ap-marca-nome { font-family: var(--ds-fonte-display); font-weight: 600; font-size: var(--ds-tam-1125); letter-spacing: -0.015em; }
+
+.ds-ap-topo {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--ds-esp-3);
+  padding-top: max(var(--ds-esp-3), env(safe-area-inset-top, 0px));
+  padding-bottom: var(--ds-esp-3);
+}
+.ds-ap-topo-acoes { display: flex; align-items: center; gap: var(--ds-esp-1); }
+@media (min-width: 640px) { .ds-ap-topo-acoes { gap: var(--ds-esp-3); } }
+.ds-raiz .ds-ap-topo-link {
+  display: inline-flex; align-items: center;
+  min-height: var(--ds-alvo-toque);
+  padding: 0 10px;
+  border-radius: var(--ds-raio-controle);
+  color: var(--ds-tinta);
+  font-size: var(--ds-tam-0875);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ds-raiz .ds-ap-topo-link:hover { background: var(--ds-neutro-fundo); }
+
+/* ------------------------------------------------------------ abertura */
+.ds-ap-heroi-texto {
+  display: grid; justify-items: center; gap: var(--ds-esp-4);
+  padding-top: var(--ds-esp-6);
+  text-align: center;
+}
+@media (min-width: 640px) { .ds-ap-heroi-texto { gap: var(--ds-esp-6); padding-top: var(--ds-esp-12); } }
+.ds-ap-h1 {
+  max-width: 19ch;
+  font-family: var(--ds-fonte-display);
+  font-size: var(--ds-tam-225);
+  font-weight: 600;
+  line-height: var(--ds-display-altura);
+  letter-spacing: var(--ds-display-espacamento);
+  text-wrap: balance;
+}
+@media (min-width: 640px) { .ds-ap-h1 { font-size: var(--ds-tam-3); } }
+@media (min-width: 1100px) { .ds-ap-h1 { font-size: var(--ds-tam-4); max-width: 21ch; } }
+.ds-ap-lead { max-width: 56ch; font-size: var(--ds-tam-1125); line-height: 1.55; color: var(--ds-tinta-suave); text-wrap: pretty; }
+.ds-ap-heroi-acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ds-esp-3); padding-top: var(--ds-esp-1); }
+@media (max-width: 400px) {
+  .ds-ap-heroi-acoes { width: 100%; }
+  .ds-ap-heroi-acoes > * { flex: 1 1 0; padding-inline: 12px; }
+}
+
+.ds-ap-heroi-figura { margin-top: var(--ds-esp-12); }
+@media (min-width: 640px) { .ds-ap-heroi-figura { margin-top: var(--ds-esp-16); } }
+.ds-ap-heroi-palco {
+  position: relative;
+  max-width: 920px;
+  margin-inline: auto;
+  padding: 116px 12px 124px;
+}
+@media (min-width: 640px) { .ds-ap-heroi-palco { padding: 72px 190px 80px; } }
+.ds-ap-heroi-cartao { position: relative; z-index: 1; max-width: 440px; margin-inline: auto; }
+.ds-ap-heroi-onda { border-color: transparent; box-shadow: var(--ds-sombra); }
+.ds-ap-nota { margin-top: var(--ds-esp-3); text-align: center; font-size: var(--ds-tam-075); color: var(--ds-tinta-suave); }
+
+/* objetos: três camadas de transform (rolagem > ponteiro > flutuação) */
+.ds-ap-flutua { position: absolute; z-index: 2; display: block; pointer-events: none; }
+.ds-ap-flutua-ponteiro, .ds-ap-flutua-giro { display: block; }
+.ds-ap-flutua .ds-objeto { display: block; width: 100%; height: auto; }
+.ds-ap-flutua--relogio { width: 96px; top: 8px; left: 10px; rotate: -8deg; }
+.ds-ap-flutua--sino { width: 84px; top: 6px; right: 16px; rotate: 6deg; }
+.ds-ap-flutua--megafone { width: 104px; bottom: 6px; left: 4px; }
+.ds-ap-flutua--celular { width: 96px; bottom: 4px; right: 10px; rotate: -4deg; }
+.ds-ap-flutua--calendario { display: none; }
+@media (min-width: 640px) {
+  .ds-ap-flutua--relogio { width: 148px; top: 28px; left: 18px; }
+  .ds-ap-flutua--sino { width: 118px; top: -40px; right: 64px; }
+  .ds-ap-flutua--megafone { width: 168px; bottom: 40px; left: -40px; }
+  .ds-ap-flutua--celular { width: 156px; bottom: -44px; right: 22px; }
+  .ds-ap-flutua--calendario { display: block; width: 112px; top: 40%; right: -36px; rotate: 7deg; }
+}
+@media (min-width: 640px) and (max-width: 860px) {
+  .ds-ap-heroi-palco { padding-inline: 120px; }
+  .ds-ap-flutua--relogio { width: 110px; }
+  .ds-ap-flutua--megafone { width: 128px; left: -20px; }
+  .ds-ap-flutua--calendario { display: none; }
+}
+
+/* ------------------------------------------------------------ seções */
+.ds-ap-secao { padding-top: var(--ds-esp-16); scroll-margin-top: var(--ds-esp-4); }
+@media (min-width: 640px) { .ds-ap-secao { padding-top: 112px; } }
+.ds-ap-secao-cabeca { display: grid; gap: var(--ds-esp-3); max-width: 68ch; margin-bottom: var(--ds-esp-8); }
+.ds-ap-h2 {
+  font-family: var(--ds-fonte-display);
+  font-size: var(--ds-tam-175);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  outline: none;
+}
+@media (min-width: 640px) { .ds-ap-h2 { font-size: var(--ds-tam-225); } }
+.ds-ap-intro { color: var(--ds-tinta-suave); font-size: var(--ds-tam-1125); line-height: 1.55; text-wrap: pretty; }
+
+/* ------------------------------------------------------------ história */
+.ds-ap-historia .ds-ap-secao-cabeca { margin-bottom: var(--ds-esp-6); }
+
+/* moldura do produto (as duas formas) */
+.ds-ap-moldura {
+  --ds-superficie-atual: var(--ds-ceu);
+  min-width: 0;
+  padding: 12px;
+  border-radius: var(--ds-raio-painel);
+  background: var(--ds-ceu);
+}
+@media (min-width: 480px) { .ds-ap-moldura { padding: 20px 24px 24px; } }
+.ds-ap-quadro { display: grid; gap: var(--ds-esp-3); max-width: 520px; margin-inline: auto; }
+.ds-ap-quadro-barra {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--ds-esp-3);
+  padding: 0 4px;
+  font-size: var(--ds-tam-0875);
+  font-weight: 500;
+  color: var(--ds-tinta-suave);
+}
+.ds-ap-quadro-app { display: inline-flex; align-items: center; gap: 8px; color: var(--ds-tinta); }
+.ds-ap-quadro-hora { font-weight: 600; color: var(--ds-tinta); }
+.ds-ap-quadro-agora { font-weight: 500; color: var(--ds-tinta-suave); }
+.ds-ap-camadas { display: grid; }
+.ds-ap-camada { grid-area: 1 / 1; align-self: start; min-width: 0; }
+.ds-ap-camada--onda2 { display: grid; gap: var(--ds-esp-2); }
+/* menos movimento: nada se cruza, só a camada do instante aparece */
+@media (prefers-reduced-motion: reduce) {
+  .ds-ap-camada:not(.ds-ap-camada--ativa) { display: none; }
+}
+
+/* forma fixa: escondida por padrão, liga só na tela larga e alta com movimento */
+.ds-ap-fixada { display: none; }
+@media (min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+  .ds-ap-historia .ds-ap-fixada { display: block; }
+  .ds-ap-historia .ds-ap-sequencia { display: none; }
+}
+.ds-ap-palco {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: center;
+  gap: var(--ds-esp-12);
+  height: 100vh;
+  height: 100svh;
+  padding-top: var(--ds-esp-6);
+  padding-bottom: var(--ds-esp-6);
+}
+.ds-ap-lado { display: grid; gap: var(--ds-esp-12); align-content: center; min-width: 0; }
+.ds-ap-legendas { display: grid; }
+.ds-ap-legenda { grid-area: 1 / 1; display: grid; gap: var(--ds-esp-3); align-content: start; }
+.ds-ap-legenda-titulo {
+  font-family: var(--ds-fonte-display);
+  font-size: var(--ds-tam-175);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+@media (min-width: 1100px) { .ds-ap-fixada .ds-ap-legenda-titulo { font-size: var(--ds-tam-225); line-height: 1.1; letter-spacing: -0.025em; } }
+.ds-ap-legenda-texto { color: var(--ds-tinta-suave); font-size: var(--ds-tam-1125); line-height: 1.55; max-width: 44ch; text-wrap: pretty; }
+
+/* indicador de progresso: trilho que enche e os seis passos */
+.ds-ap-progresso { position: relative; }
+.ds-ap-trilho {
+  position: absolute; left: 8px; top: 22px; bottom: 22px; width: 2px;
+  border-radius: 2px;
+  background: var(--ds-linha);
+  overflow: hidden;
+}
+.ds-ap-trilho-cheio { display: block; width: 100%; height: 100%; background: var(--ds-azul); transform-origin: 50% 0%; }
+.ds-ap-progresso ol { position: relative; display: grid; }
+.ds-raiz .ds-ap-passo {
+  display: flex; align-items: center; justify-content: flex-start; gap: 14px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 8px 0 0;
+  border: 0;
+  border-radius: var(--ds-raio-controle);
+  background: transparent;
+  color: var(--ds-tinta-suave);
+  font: inherit;
+  font-size: var(--ds-tam-1);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--ds-dur-rapida) var(--ds-curva-padrao);
+}
+.ds-raiz .ds-ap-passo:hover { color: var(--ds-tinta); }
+.ds-ap-passo-ponto {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--ds-linha-forte);
+  background: var(--ds-nevoa);
+  transition: background-color var(--ds-dur-rapida) var(--ds-curva-padrao), border-color var(--ds-dur-rapida) var(--ds-curva-padrao), transform var(--ds-dur-media) var(--ds-curva-saida);
+}
+.ds-raiz .ds-ap-passo--feito { color: var(--ds-tinta); }
+.ds-ap-passo--feito .ds-ap-passo-ponto { border-color: var(--ds-azul); background: var(--ds-azul); transform: scale(0.67); }
+.ds-raiz .ds-ap-passo--atual { color: var(--ds-tinta); font-weight: 600; }
+.ds-ap-passo--atual .ds-ap-passo-ponto { border-color: var(--ds-azul); background: var(--ds-papel); box-shadow: inset 0 0 0 3px var(--ds-papel), inset 0 0 0 9px var(--ds-azul); }
+
+.ds-ap-fixada .ds-ap-moldura { padding: 20px 28px 28px; }
+.ds-ap-fixada .ds-ap-quadro { max-width: 540px; }
+
+/* forma em sequência */
+.ds-ap-sequencia { display: grid; gap: var(--ds-esp-12); }
+.ds-ap-seq-passo { display: grid; gap: var(--ds-esp-4); align-items: start; min-width: 0; }
+.ds-ap-seq-legenda { display: flex; gap: var(--ds-esp-3); align-items: flex-start; }
+.ds-ap-seq-numero {
+  display: inline-grid; place-items: center; flex-shrink: 0;
+  width: 32px; height: 32px; margin-top: 1px;
+  border-radius: 50%;
+  background: var(--ds-azul);
+  color: var(--ds-sobre-azul);
+  font-size: var(--ds-tam-0875);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ds-ap-seq-textos { display: grid; gap: var(--ds-esp-2); min-width: 0; }
+.ds-ap-sequencia .ds-ap-legenda-titulo { font-size: var(--ds-tam-1375); line-height: 1.2; letter-spacing: -0.015em; }
+.ds-ap-sequencia .ds-ap-legenda-texto { font-size: var(--ds-tam-1); }
+@media (min-width: 961px) {
+  .ds-ap-sequencia { gap: var(--ds-esp-16); }
+  .ds-ap-seq-passo { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--ds-esp-12); }
+  .ds-ap-seq-legenda { position: sticky; top: var(--ds-esp-8); padding-top: var(--ds-esp-6); }
+  .ds-ap-sequencia .ds-ap-legenda-titulo { font-size: var(--ds-tam-175); }
+  .ds-ap-sequencia .ds-ap-legenda-texto { font-size: var(--ds-tam-1125); }
+}
+
+/* ------------------------------------------------------------ secretaria */
+.ds-ap-graficos { display: grid; gap: var(--ds-esp-6); }
+.ds-ap-graficos > .ds-cartao { padding: var(--ds-esp-6); }
+@media (max-width: 480px) { .ds-ap-graficos > .ds-cartao { padding: var(--ds-esp-4); } }
+@media (min-width: 960px) {
+  .ds-ap-graficos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ds-ap-grafico-largo { grid-column: 1 / -1; }
+}
+
+/* ------------------------------------------------------------ professor */
+.ds-ap-professor { display: grid; gap: var(--ds-esp-8); align-items: center; }
+@media (min-width: 960px) { .ds-ap-professor { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--ds-esp-12); } }
+.ds-ap-professor-texto { display: grid; gap: var(--ds-esp-6); }
+.ds-ap-frases { display: grid; max-width: 46ch; }
+.ds-ap-frases li { padding: var(--ds-esp-4) 0; border-top: 1px solid var(--ds-linha); font-size: var(--ds-tam-1125); line-height: 1.5; }
+.ds-ap-frases li:last-child { border-bottom: 1px solid var(--ds-linha); }
+.ds-ap-professor-cena {
+  display: grid; justify-items: center; align-items: center; gap: var(--ds-esp-4);
+  padding: var(--ds-esp-6) var(--ds-esp-4);
+  border-radius: var(--ds-raio-painel);
+  background: var(--ds-ceu);
+}
+@media (min-width: 640px) {
+  .ds-ap-professor-cena { grid-template-columns: auto minmax(0, 1fr); padding: var(--ds-esp-8); gap: var(--ds-esp-6); }
+}
+.ds-ap-professor-celular { width: 150px; }
+@media (min-width: 640px) { .ds-ap-professor-celular { width: 200px; } }
+.ds-ap-mensagem { --ds-superficie-atual: var(--ds-papel); display: grid; gap: var(--ds-esp-4); width: 100%; max-width: 380px; box-shadow: var(--ds-sombra); border-color: transparent; }
+.ds-ap-mensagem-titulo { font-family: var(--ds-fonte-display); font-size: var(--ds-tam-1125); font-weight: 600; letter-spacing: -0.01em; }
+.ds-ap-mensagem-dados { display: grid; gap: 6px; margin: 0; font-size: var(--ds-tam-0875); }
+.ds-ap-mensagem-dados div { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: var(--ds-esp-2); }
+.ds-ap-mensagem-dados dt { color: var(--ds-tinta-suave); }
+.ds-ap-mensagem-dados dd { margin: 0; font-weight: 500; }
+.ds-ap-mensagem-prazo { color: var(--ds-laranja-texto); font-weight: 600; }
+.ds-ap-mensagem-acoes { display: flex; gap: var(--ds-esp-2); }
+.ds-ap-mensagem-acoes > * { flex: 1 1 0; }
+.ds-ap-mensagem-resposta { display: grid; justify-items: start; gap: var(--ds-esp-2); min-height: 44px; font-weight: 500; }
+
+/* ------------------------------------------------------------ fecho e rodapé */
+.ds-ap-fecho { display: grid; justify-items: start; gap: var(--ds-esp-6); padding-bottom: var(--ds-esp-4); }
+.ds-ap-fecho .ds-ap-h2 { max-width: 24ch; }
+.ds-ap-rodape {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--ds-esp-3) var(--ds-esp-6);
+  margin-top: var(--ds-esp-16);
+  padding-top: var(--ds-esp-6);
+  padding-bottom: max(var(--ds-esp-8), env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--ds-linha);
+  font-size: var(--ds-tam-0875);
+  color: var(--ds-tinta-suave);
+}
+.ds-ap-rodape p { flex: 1 1 260px; }
+.ds-ap-rodape-links { display: flex; gap: var(--ds-esp-4); }
+.ds-ap-rodape-links a { display: inline-flex; align-items: center; min-height: var(--ds-alvo-toque); }

@@ -22,6 +22,8 @@ import "./styles.css";
 
 // Design system: página pública, carregada só quando aberta.
 const DesignSystem = lazy(() => import("./ds/PaginaDesignSystem"));
+// Apresentação pública do produto (sem login), também carregada só quando aberta.
+const Apresentacao = lazy(() => import("./apresentacao/PaginaApresentacao"));
 
 function Protegida({ children, admin = false }: { children: ReactNode; admin?: boolean }) {
   const { usuario, carregando } = useAuth();
@@ -39,6 +41,7 @@ function App() {
       <Route path="/esqueci-senha" element={<EsqueciSenha />} />
       <Route path="/redefinir-senha" element={<RedefinirSenha />} />
       <Route path="/design-system" element={<Suspense fallback={<Carregando />}><DesignSystem /></Suspense>} />
+      <Route path="/apresentacao" element={<Suspense fallback={<Carregando />}><Apresentacao /></Suspense>} />
       <Route path="/" element={<Protegida><Painel /></Protegida>} />
       <Route path="/solicitacoes/nova" element={<Protegida><NovaSolicitacao /></Protegida>} />
       <Route path="/solicitacoes/:id" element={<Protegida><Acompanhamento /></Protegida>} />
@@ -56,11 +59,12 @@ function App() {
 
 // Na demonstração a navegação fica em memória: funciona aberta como arquivo
 // local ou dentro de outra página.
-// Na demonstração, o endereço "#/design-system" abre direto o design system.
+// Na demonstração, os endereços "#design-system" e "#apresentacao" (com ou sem a
+// barra, "#/apresentacao") abrem direto essas páginas públicas.
 // A variável VITE_ENTRADA gera uma demonstração que já abre numa rota específica.
-const hashInicial = typeof window !== "undefined" ? window.location.hash : "";
-const entradaDemo =
-  import.meta.env.VITE_ENTRADA || (hashInicial === "#/design-system" || hashInicial === "#design-system" ? "/design-system" : "/");
+const ROTAS_POR_HASH = ["/design-system", "/apresentacao"];
+const hashInicial = typeof window !== "undefined" ? window.location.hash.replace(/^#\/?/, "/") : "";
+const entradaDemo = import.meta.env.VITE_ENTRADA || (ROTAS_POR_HASH.includes(hashInicial) ? hashInicial : "/");
 const Router = DEMO
   ? ({ children }: { children: ReactNode }) => <MemoryRouter initialEntries={[entradaDemo]}>{children}</MemoryRouter>
   : BrowserRouter;

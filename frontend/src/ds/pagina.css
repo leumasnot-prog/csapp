@@ -260,3 +260,4 @@
   color: var(--ds-tinta-suave);
 }
 .ds-pg-rodape a { display: inline-flex; align-items: center; min-height: var(--ds-alvo-toque); }
+.ds-pg-rodape-links { display: flex; flex-wrap: wrap; gap: 0 var(--ds-esp-6); }
